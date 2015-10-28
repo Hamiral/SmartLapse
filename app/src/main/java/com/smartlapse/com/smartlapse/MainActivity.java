@@ -15,6 +15,7 @@ import android.hardware.Camera.CameraInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     public final static String DEBUG_TAG = "MakePhotoActivity";
     private Camera camera;
     private int cameraId = 0;
+    public CameraPreview mPreview;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "No camera on this device", Toast.LENGTH_LONG)
                     .show();
         } else {
-            cameraId = findFrontFacingCamera();
+            cameraId = findBackFacingCamera();
             if (cameraId < 0) {
                 Toast.makeText(this, "No front facing camera found.",
                         Toast.LENGTH_LONG).show();
@@ -43,21 +45,28 @@ public class MainActivity extends AppCompatActivity {
                 camera = Camera.open(cameraId);
             }
         }
+        // Create an instance of Camera
+
+
+        // Create our Preview view and set it as the content of our activity.
+        mPreview = new CameraPreview(this, camera);
+        FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
+        preview.addView(mPreview);
     }
 
     public void onClick(View view) {
-        camera.takePicture(null, null,
+        camera.takePicture(null, null,null,
                 new PhotoHandler(getApplicationContext()));
     }
 
-    private int findFrontFacingCamera() {
+    private int findBackFacingCamera() {
         int cameraId = -1;
         // Search for the front facing camera
         int numberOfCameras = Camera.getNumberOfCameras();
         for (int i = 0; i < numberOfCameras; i++) {
             CameraInfo info = new CameraInfo();
             Camera.getCameraInfo(i, info);
-            if (info.facing == CameraInfo.CAMERA_FACING_FRONT) {
+            if (info.facing == CameraInfo.CAMERA_FACING_BACK) {
                 Log.d(DEBUG_TAG, "Camera found");
                 cameraId = i;
                 break;
