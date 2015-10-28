@@ -14,6 +14,7 @@ import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
 import android.os.Environment;
 import android.util.Log;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 public class PhotoHandler implements PictureCallback {
@@ -59,6 +60,8 @@ public class PhotoHandler implements PictureCallback {
             Toast.makeText(context, "Image could not be saved.",
                     Toast.LENGTH_LONG).show();
         }
+        camera.stopPreview();
+        camera.startPreview();
     }
 
     private File getDir() {
