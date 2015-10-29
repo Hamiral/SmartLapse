@@ -1,5 +1,6 @@
 package com.smartlapse.com.smartlapse;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -55,9 +56,14 @@ public class MainActivity extends AppCompatActivity {
         preview.addView(mPreview);
     }
 
-    public void onClick(View view) {
+    public void onClickRecord(View view) {
         camera.takePicture(null, null, null,
                 new PhotoHandler(getApplicationContext()));
+    }
+
+    public void onClickSettings(View view) {
+        Intent intent= new Intent(this,SettingsActivity.class);
+        startActivity(intent);
     }
 
     private int findBackFacingCamera() {
