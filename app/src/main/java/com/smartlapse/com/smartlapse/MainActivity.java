@@ -2,6 +2,7 @@ package com.smartlapse.com.smartlapse;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,9 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,11 +31,23 @@ public class MainActivity extends AppCompatActivity {
     private Camera camera;
     private int cameraId = 0;
     public CameraPreview mPreview;
+    private GlobalVariable appState ;
+    private String PREFS_DURATIONH = "DurationH";
+    private String PREFS_DURATIONMIN = "DurationMin";
+    private String PREFS_INTERVAL = "Interval";
+    private String PREFS_STEPS = "Steps";
+    private static int count = 0;
+    /**
+     * Timer to regularly check the status of the connection with the login API
+     */
+    Timer myTimer;
+    final Handler myHandler = new Handler();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        appState= ((GlobalVariable)getApplicationContext());
 
         // do we have a camera?
         if (!getPackageManager()
@@ -57,8 +73,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickRecord(View view) {
-        camera.takePicture(null, null, null,
-                new PhotoHandler(getApplicationContext()));
+        final int DurationH=appState.getPref(PREFS_DURATIONH, getApplicationContext());
+        final int DurationMin=appState.getPref(PREFS_DURATIONMIN, getApplicationContext());
+        final int Intervals=appState.getPref(PREFS_INTERVAL, getApplicationContext());
+        int Steps;
+        count=0;
+       myTimer = new Timer();
+        myTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                camera.takePicture(null, null, null,
+                        new PhotoHandler(getApplicationContext()));
+
+                count++;
+                if (((DurationH * 60 + DurationMin) * 60 / Intervals) <= count) {
+                    myTimer.cancel();
+                    myTimer.purge();
+                }
+            }
+        }, 0, Intervals * 1000);
     }
 
     public void onClickSettings(View view) {

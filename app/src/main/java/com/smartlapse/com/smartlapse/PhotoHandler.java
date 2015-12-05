@@ -29,8 +29,6 @@ public class PhotoHandler implements PictureCallback {
     public void onPictureTaken(byte[] data, Camera camera) {
 
         File pictureFileDir = getDir();
-        Toast.makeText(context, getDir().getName(),
-                Toast.LENGTH_LONG).show();
         if (!pictureFileDir.exists() && !pictureFileDir.mkdirs()) {
 
             Log.d(MainActivity.DEBUG_TAG, "Can't create directory to save image.");
