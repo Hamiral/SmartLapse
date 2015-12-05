@@ -24,11 +24,11 @@ public class GlobalVariable extends Application {
      * @param value The string we want to store/add
      * @param context The context of the application
      */
-    public void putPref(String Key, String value, Context context)
+    public void putPref(String Key, int value, Context context)
     {
         SharedPreferences sharedPref = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(Key, value);
+        editor.putInt(Key, value);
         editor.commit();
     }
 
@@ -38,10 +38,10 @@ public class GlobalVariable extends Application {
      * @param context The context of the application
      * @return The String stored in preferences PREFS_NAME under the key Key
      */
-    public String getPref(String Key, Context context)
+    public int getPref(String Key, Context context)
     {
         SharedPreferences sharedPref = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        return sharedPref.getString(Key, null);
+        return sharedPref.getInt(Key, 0);
     }
 
     /**

@@ -22,6 +22,7 @@ public class SettingsActivity extends AppCompatActivity {
     private EditText SetPreferences;
     private GlobalVariable appState ;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,31 +36,31 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void setSettingsPreferences() {
         SetPreferences=(EditText) findViewById(R.id.DurationHEditText);
-        SetPreferences.setText(appState.getPref(PREFS_DURATIONH,getApplicationContext()));
+        SetPreferences.setText(Integer.toString(appState.getPref(PREFS_DURATIONH,getApplicationContext())));
 
         SetPreferences=(EditText) findViewById(R.id.DurationMinEditText);
-        SetPreferences.setText(appState.getPref(PREFS_DURATIONMIN, getApplicationContext()));
+        SetPreferences.setText(Integer.toString(appState.getPref(PREFS_DURATIONMIN, getApplicationContext())));
 
         SetPreferences=(EditText) findViewById(R.id.IntervalEditText);
-        SetPreferences.setText(appState.getPref(PREFS_INTERVAL, getApplicationContext()));
+        SetPreferences.setText(Integer.toString(appState.getPref(PREFS_INTERVAL, getApplicationContext())));
 
         SetPreferences=(EditText) findViewById(R.id.StepsEditText);
-        SetPreferences.setText(appState.getPref(PREFS_STEPS,getApplicationContext()));
+        SetPreferences.setText(Integer.toString(appState.getPref(PREFS_STEPS,getApplicationContext())));
     }
 
     public void onClickSubmitParameters(View view) {
 
         GetPreferences=(EditText) findViewById(R.id.DurationHEditText);
-        appState.putPref(PREFS_DURATIONH, GetPreferences.getText().toString(),getApplicationContext());
+        appState.putPref(PREFS_DURATIONH, Integer.parseInt(GetPreferences.getText().toString()),getApplicationContext());
 
         GetPreferences=(EditText) findViewById(R.id.DurationMinEditText);
-        appState.putPref(PREFS_DURATIONMIN, GetPreferences.getText().toString(),getApplicationContext());
+        appState.putPref(PREFS_DURATIONMIN, Integer.parseInt(GetPreferences.getText().toString()),getApplicationContext());
 
         GetPreferences=(EditText) findViewById(R.id.IntervalEditText);
-        appState.putPref(PREFS_INTERVAL,GetPreferences.getText().toString(),getApplicationContext());
+        appState.putPref(PREFS_INTERVAL,Integer.parseInt(GetPreferences.getText().toString()),getApplicationContext());
 
         GetPreferences=(EditText) findViewById(R.id.StepsEditText);
-        appState.putPref(PREFS_STEPS, GetPreferences.getText().toString(),getApplicationContext());
+        appState.putPref(PREFS_STEPS, Integer.parseInt(GetPreferences.getText().toString()),getApplicationContext());
 
         Toast.makeText(getApplicationContext(), "Settings saved",
                 Toast.LENGTH_LONG).show();
