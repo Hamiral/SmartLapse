@@ -11,23 +11,37 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:showIn="@layout/activity_main" tools:context=".MainActivity">
+
+
         <FrameLayout
             android:id="@+id/camera_preview"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             >
-
-        </FrameLayout>
-
+        <!--
         <Button
+            android:id="@+id/captureFront"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Settings"
-            android:id="@+id/button"
-            android:layout_gravity="right|bottom"
+            android:onClick="onClickScan"
+            android:text="Scan"
+            android:layout_gravity="center_horizontal|bottom"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:onClick="onClickSettings" />
+            android:layout_alignParentLeft="true"
+            android:nestedScrollingEnabled="true" />
+            -->
+        </FrameLayout>
+
+
+        <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        android:id="@+id/button"
+        android:layout_gravity="right|bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:onClick="onClickSettings" />
 
         <Button
             android:id="@+id/captureFront"

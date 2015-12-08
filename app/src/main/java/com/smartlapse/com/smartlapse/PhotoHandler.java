@@ -4,18 +4,17 @@ package com.smartlapse.com.smartlapse;
 * Created by Alex on 28/10/2015.
 */
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import android.content.Context;
 import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
 import android.os.Environment;
 import android.util.Log;
-import android.widget.FrameLayout;
 import android.widget.Toast;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class PhotoHandler implements PictureCallback {
 
