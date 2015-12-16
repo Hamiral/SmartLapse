@@ -76,7 +76,7 @@ public class SettingsActivity extends BlunoLibrary  {
 
     public void onClickSend(View view) {
         final int Steps=appState.getPref(PREFS_STEPS, getApplicationContext());
-        serialSend(Integer.toString(Steps));
+        serialSend(Integer.toString(Steps)+'\n');
     }
 
     @Override
