@@ -62,21 +62,12 @@ public class MainActivity extends AppCompatActivity {
         FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
         preview.addView(mPreview);
 
-        /*
-        Log.d("BLE", "starting Process Creation");
-        onCreateProcess();														//onCreate Process by BlunoLibrary
-        Log.d("BLE", "finished Process Creation");
-        serialBegin(115200);
-        */
     }
 
     public void onClickRecord(View view) {
         final int DurationH=appState.getPref(PREFS_DURATIONH, getApplicationContext());
         final int DurationMin=appState.getPref(PREFS_DURATIONMIN, getApplicationContext());
         final int Intervals=appState.getPref(PREFS_INTERVAL, getApplicationContext());
-
-        //serialSend(Integer.toString(Intervals));
-
 
         count=0;
        myTimer = new Timer();
@@ -123,14 +114,12 @@ public class MainActivity extends AppCompatActivity {
             camera.stopPreview();
         }
         super.onPause();
-        //onPauseProcess();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         camera.startPreview();
-        //onResumeProcess();
     }
     @Override
     protected void onDestroy(){
@@ -139,70 +128,6 @@ public class MainActivity extends AppCompatActivity {
             camera.release();
             camera = null;
         }
-        //onDestroyProcess();
     }
 
-    /*@Override
-    public boolean onKeyUp(int keyCode,KeyEvent event){
-        switch(keyCode){
-            case KeyEvent.KEYCODE_HOME:
-                break;
-        }
-        return super.onKeyDown(keyCode,event);
-    }*/
-
-    /*
-    public void onClickScan(View view) {
-        buttonScanOnClickProcess();
-    }
-
-    @Override
-    public void onConectionStateChange(BlunoLibrary.connectionStateEnum theConnectionState) {//Once connection state changes, this function will be called
-        String state = "Nope";
-        switch (theConnectionState) {											//Four connection state
-            case isConnected:
-                state = "Connected";
-                Toast.makeText(this, "State : " + state, Toast.LENGTH_SHORT)
-                        .show();
-                break;
-            case isConnecting:
-                state = "Connecting";
-                break;
-            case isToScan:
-                state = "is To Scan";
-                break;
-            case isScanning:
-                state = "Scanning";
-                break;
-            case isDisconnecting:
-                state = "isDisconnecting";
-                break;
-            default:
-                break;
-        }
-        Log.d("Tag Name", "State : " + state);
-    }
-
-    @Override
-    public void onSerialReceived(String theString) {							//Once connection data received, this function will be called
-        // TODO Auto-generated method stub
-        // serialReceivedText.append(theString);							//append the text into the EditText
-        Toast.makeText(this, theString, Toast.LENGTH_SHORT)
-                .show();
-        Log.v("BLE", "Received : " + theString);
-        //The Serial data from the BLUNO may be sub-packaged, so using a buffer to hold the String is a good choice.
-
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        onActivityResultProcess(requestCode, resultCode, data);					//onActivityResult Process by BlunoLibrary
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    protected void onStop() {
-        super.onStop();
-        onStopProcess();														//onStop Process by BlunoLibrary
-    }
-    */
 }
